@@ -1,13 +1,5 @@
-import Layout from '../components/MyLayout.js'
-import Link from 'next/link'
-
-function getPosts () {
-  return [
-    { id: 'hello-nextjs', title: 'Hello Next.js'},
-    { id: 'learn-nextjs', title: 'Learn Next.js is awesome'},
-    { id: 'deploy-nextjs', title: 'Deploy apps with ZEIT'},
-  ]
-}
+import Link from 'next/link';
+import Layout from '../components/MyLayout.js';
 
 const PostLink = ({ post }) => (
   <li>
@@ -23,7 +15,7 @@ const PostLink = ({ post }) => (
       a {
         text-decoration: none;
         color: blue;
-        font-family: "Arial";
+        font-family: 'Arial';
       }
 
       a:hover {
@@ -31,34 +23,34 @@ const PostLink = ({ post }) => (
       }
     `}</style>
   </li>
-)
+);
 
 const wrapperStyle = { width: 400, margin: 50 };
 
 class App extends React.Component {
   state = {
     drinks: 0,
-    timeValue: 0
+    timeValue: 0,
   };
 
-  addDrink = () => {
-    let drinks = this.state.drinks
-    drinks = drinks + 1;
-    this.setState({drinks})
+  setTimeValue(event) {
+    let { timeValue } = this.state;
+    console.log(event.target.value);
+    timeValue = event.target.value;
+    this.setState({ timeValue });
   }
+
+  addDrink = () => {
+    let { drinks } = this.state;
+    drinks += 1;
+    this.setState({ drinks });
+  };
 
   removeDrink = () => {
-    let drinks = this.state.drinks
-    drinks = drinks - 1;
-    this.setState({drinks})
-  }
-
-  setTimeValue(event) {
-    let timeValue = this.state.timeValue
-    console.log(event.target.value)
-    timeValue = event.target.value
-    this.setState({timeValue})
-  }
+    let { drinks } = this.state;
+    drinks -= 1;
+    this.setState({ drinks });
+  };
 
   render() {
     return (
@@ -74,7 +66,8 @@ class App extends React.Component {
           <input onChange={event => this.setTimeValue(event)} />
         </p>
         <p>
-          It's going to take you {this.state.drinks * 2} hours to recover tomorrow, which is worth ${this.state.timeValue * 2 * this.state.drinks}.
+          It's going to take you {this.state.drinks * 2} hours to recover tomorrow, which is worth $
+          {this.state.timeValue * 2 * this.state.drinks}.
         </p>
         <p>
           <ul>
@@ -83,8 +76,9 @@ class App extends React.Component {
           </ul>
         </p>
         <style jsx>{`
-          h1, a {
-            font-family: "Arial";
+          h1,
+          a {
+            font-family: 'Arial';
           }
 
           ul {
@@ -111,4 +105,3 @@ class App extends React.Component {
 }
 
 export default App;
-  
