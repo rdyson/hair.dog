@@ -1,104 +1,79 @@
-import Link from 'next/link';
-import Layout from '../components/MyLayout.js';
-
-const PostLink = ({ post }) => (
-  <li>
-    <Link as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
-      <a>{post.title}</a>
-    </Link>
-    <style jsx>{`
-      li {
-        list-style: none;
-        margin: 5px 0;
-      }
-
-      a {
-        text-decoration: none;
-        color: blue;
-        font-family: 'Arial';
-      }
-
-      a:hover {
-        opacity: 0.6;
-      }
-    `}</style>
-  </li>
-);
-
-const wrapperStyle = { width: 400, margin: 50 };
+import Layout from '../components/Layout.js';
 
 class App extends React.Component {
   state = {
-    drinks: 0,
+    drinksQuantity: 0,
+    hangoverThreshold: 0,
     timeValue: 0,
+    hangoverHours: 0,
+    drinkPrice: 0,
   };
 
-  setTimeValue(event) {
+  setTimeValue = event => {
     let { timeValue } = this.state;
-    console.log(event.target.value);
     timeValue = event.target.value;
     this.setState({ timeValue });
   }
 
-  addDrink = () => {
-    let { drinks } = this.state;
-    drinks += 1;
-    this.setState({ drinks });
+  setDrinksQuantity = event => {
+    let { drinksQuantity, hangoverHours } = this.state;
+    drinksQuantity = event.target.value;
+    hangoverHours = 4 + Number(drinksQuantity);
+    this.setState({ drinksQuantity, hangoverHours });
   };
 
-  removeDrink = () => {
-    let { drinks } = this.state;
-    drinks -= 1;
-    this.setState({ drinks });
+  setDrinkPrice = event => {
+    let { drinkPrice } = this.state;
+    drinkPrice = event.target.value;
+    this.setState({ drinkPrice });
+  };
+
+  setHangoverThreshold = event => {
+    let hangoverThreshold = this.state;
+    hangoverThreshold = event.target.value;
+    this.setState({ hangoverThreshold });
   };
 
   render() {
+    const Dropdown = props => (
+      <select onChange={event => props.setValue(event)}>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+    );
+
     return (
       <Layout>
-        <h1>hair.dog</h1>
-        <p>
-          How many drinks? {this.state.drinks}
-          <button onClick={this.addDrink}>+</button>
-          <button onClick={this.removeDrink}>-</button>
-        </p>
-        <p>
-          What's your time worth in dollars?
-          <input onChange={event => this.setTimeValue(event)} />
-        </p>
-        <p>
-          It's going to take you {this.state.drinks * 2} hours to recover tomorrow, which is worth $
-          {this.state.timeValue * 2 * this.state.drinks}.
-        </p>
-        <p>
-          <ul>
-            <li>drinks: {this.state.drinks}</li>
-            <li>timeValue: {this.state.timeValue}</li>
-          </ul>
-        </p>
-        <style jsx>{`
-          h1,
-          a {
-            font-family: 'Arial';
-          }
-
-          ul {
-            padding: 0;
-          }
-
-          li {
-            list-style: none;
-            margin: 5px 0;
-          }
-
-          a {
-            text-decoration: none;
-            color: blue;
-          }
-
-          a:hover {
-            opacity: 0.6;
-          }
-        `}</style>
+        <link rel="stylesheet" href="https://cdn.rawgit.com/mblode/marx/master/css/marx.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+        <main>
+          <h1>hair.dog🐕</h1>
+          <h3>I'm never drinking again. Until next time.</h3>
+          <p>
+            I'm going out for drinks. I'm going to have <Dropdown setValue={this.setDrinksQuantity} />
+            drinks. Usually, I have a hangover if I drink more than <Dropdown setValue={this.setHangoverThreshold} />
+            drinks, so tomorrow it's going to take me at least {this.state.hangoverHours} hours to recover. My time is
+            worth <Dropdown setValue={this.setTimeValue} /> per hour and drinks cost about <Dropdown setValue={this.setDrinkPrice} /> each, so this hangover is going to cost me at least ${this.state.drinksQuantity * this.state.drinkPrice} for the drinks plus $
+            {this.state.timeValue * this.state.hangoverHours} in wasted time, for a grand total of ${(this.state.timeValue * this.state.hangoverHours) + (this.state.drinksQuantity * this.state.drinkPrice)}. Worth it?
+          </p>
+          <p>
+            <ul>
+              <li>drinksQuantity: {this.state.drinksQuantity}</li>
+              <li>hangoverThreshold: {this.state.hangoverThreshold}</li>
+              <li>timeValue: {this.state.timeValue}</li>
+              <li>hangoverHours: {this.state.hangoverHours}</li>
+              <li>drinkPrice: {this.state.drinkPrice}</li>
+            </ul>
+          </p>
+        </main>
       </Layout>
     );
   }
