@@ -1,19 +1,13 @@
+import Pluralize from 'react-pluralize';
 import Layout from '../components/Layout.js';
 
 class App extends React.Component {
   state = {
-    drinksQuantity: 0,
-    hangoverThreshold: 0,
-    timeValue: 0,
-    hangoverHours: 0,
-    drinkPrice: 0,
+    drinkPrice: 5,
+    drinksQuantity: 1,
+    hangoverHours: 1,
+    hangoverThreshold: 1,
   };
-
-  setTimeValue = event => {
-    let { timeValue } = this.state;
-    timeValue = event.target.value;
-    this.setState({ timeValue });
-  }
 
   setDrinksQuantity = event => {
     let { drinksQuantity, hangoverHours } = this.state;
@@ -29,14 +23,14 @@ class App extends React.Component {
   };
 
   setHangoverThreshold = event => {
-    let hangoverThreshold = this.state;
+    let { hangoverThreshold } = this.state;
     hangoverThreshold = event.target.value;
     this.setState({ hangoverThreshold });
   };
 
   render() {
     const Dropdown = props => (
-      <select onChange={event => props.setValue(event)}>
+      <select value={props.value} onChange={event => props.setValue(event)}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -47,8 +41,26 @@ class App extends React.Component {
         <option value="8">8</option>
         <option value="9">9</option>
         <option value="10">10</option>
+        <style jsx>{`
+          select {
+            width: 20px;
+            height: auto !important;
+            display: inline;
+            border: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-indent: 1px;
+            vertical-align: bottom;
+            padding: 0;
+            margin-left: 6px;
+            color: blue;
+            font-weight: strong;
+          }
+        `}</style>
       </select>
     );
+
+    const { drinkPrice, drinksQuantity, hangoverHours, hangoverThreshold } = this.state;
 
     return (
       <Layout>
@@ -58,19 +70,21 @@ class App extends React.Component {
           <h1>hair.dog🐕</h1>
           <h3>I'm never drinking again. Until next time.</h3>
           <p>
-            I'm going out for drinks. I'm going to have <Dropdown setValue={this.setDrinksQuantity} />
-            drinks. Usually, I have a hangover if I drink more than <Dropdown setValue={this.setHangoverThreshold} />
-            drinks, so tomorrow it's going to take me at least {this.state.hangoverHours} hours to recover. My time is
-            worth <Dropdown setValue={this.setTimeValue} /> per hour and drinks cost about <Dropdown setValue={this.setDrinkPrice} /> each, so this hangover is going to cost me at least ${this.state.drinksQuantity * this.state.drinkPrice} for the drinks plus $
-            {this.state.timeValue * this.state.hangoverHours} in wasted time, for a grand total of ${(this.state.timeValue * this.state.hangoverHours) + (this.state.drinksQuantity * this.state.drinkPrice)}. Worth it?
+            I'm going out for drinks. I'm going to have{' '}
+            <Dropdown value={drinksQuantity} setValue={this.setDrinksQuantity} />{' '}
+            <Pluralize singular="drink" count={drinksQuantity} showCount={false} />. I usually have a hangover if I
+            drink more than <Dropdown value={hangoverThreshold} setValue={this.setHangoverThreshold} />{' '}
+            <Pluralize singular="drink" count={drinksQuantity} showCount={false} />. Drinks cost about{' '}
+            <Dropdown value={drinkPrice} setValue={this.setDrinkPrice} /> each, so this hangover is going to cost me at
+            least ${drinksQuantity * drinkPrice} for the drinks plus {hangoverHours} useless{' '}
+            <Pluralize singular="hour" count={hangoverHours} showCount={false} />. Worth it?
           </p>
           <p>
             <ul>
-              <li>drinksQuantity: {this.state.drinksQuantity}</li>
-              <li>hangoverThreshold: {this.state.hangoverThreshold}</li>
-              <li>timeValue: {this.state.timeValue}</li>
-              <li>hangoverHours: {this.state.hangoverHours}</li>
-              <li>drinkPrice: {this.state.drinkPrice}</li>
+              <li>drinkPrice: {drinkPrice}</li>
+              <li>drinksQuantity: {drinksQuantity}</li>
+              <li>hangoverHours: {hangoverHours}</li>
+              <li>hangoverThreshold: {hangoverThreshold}</li>
             </ul>
           </p>
         </main>
