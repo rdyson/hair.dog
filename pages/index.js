@@ -5,14 +5,14 @@ class App extends React.Component {
   state = {
     drinkPrice: 5,
     drinksQuantity: 1,
-    hangoverHours: 1,
+    hangoverHours: 4,
     hangoverThreshold: 1,
   };
 
   setDrinksQuantity = event => {
     let { drinksQuantity, hangoverHours } = this.state;
     drinksQuantity = event.target.value;
-    hangoverHours = 4 + Number(drinksQuantity);
+    hangoverHours = 3 + Number(drinksQuantity);
     this.setState({ drinksQuantity, hangoverHours });
   };
 
