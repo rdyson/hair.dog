@@ -71,6 +71,23 @@ class App extends React.Component {
           <link rel="stylesheet" href="https://cdn.rawgit.com/mblode/marx/master/css/marx.min.css" />
           <link href="https://fonts.googleapis.com/css?family=Pacifico|Catamaran:400,600" rel="stylesheet" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(f, a, t, h, o, m){
+                a[h]=a[h]||function(){
+                    (a[h].q=a[h].q||[]).push(arguments)
+                };
+                o=f.createElement('script'),
+                m=f.getElementsByTagName('script')[0];
+                o.async=1; o.src=t; o.id='fathom-script';
+                m.parentNode.insertBefore(o,m)
+                })(document, window, '//cdn.usefathom.com/tracker.js', 'fathom');
+                fathom('set', 'siteId', 'NNERMNMD');
+                fathom('trackPageview');
+              `,
+            }}
+          />
         </Head>
         <main>
           <h1>
