@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Pluralize from 'react-pluralize';
-import Layout from '../components/Layout.js';
 
 class App extends React.Component {
   state = {
@@ -65,52 +64,56 @@ class App extends React.Component {
     const { drinkPrice, drinksQuantity, hangoverHours, hangoverThreshold } = this.state;
 
     return (
-      <Layout>
+      <div>
         <Head>
           <title>hair.dog</title>
           <link rel="icon" type="image/x-icon" href="/static/dog.png" />
           <link rel="stylesheet" href="https://cdn.rawgit.com/mblode/marx/master/css/marx.min.css" />
           <link href="https://fonts.googleapis.com/css?family=Pacifico|Catamaran:400,600" rel="stylesheet" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Head>
         <main>
           <h1>
             hair.dog <img src="/static/dog.png" alt="A dog icon" />
           </h1>
-          <h2>“I'm never drinking again” Mad Libs</h2>
-          <p className="madlib">
-            I'm going out for drinks. I'm going to have{' '}
-            <Dropdown value={drinksQuantity} setValue={this.setDrinksQuantity} />{' '}
-            <Pluralize singular="drink" count={drinksQuantity} showCount={false} />. I usually have a hangover if I
-            drink more than <Dropdown value={hangoverThreshold} setValue={this.setHangoverThreshold} />{' '}
-            <Pluralize singular="drink" count={hangoverThreshold} showCount={false} />. Drinks cost about
-            <Dropdown value={drinkPrice} setValue={this.setDrinkPrice} /> dollars each, so this hangover is going to
-            cost me at least{' '}
-            <strong>
-              ${drinksQuantity * drinkPrice} for the drinks plus {hangoverHours} useless{' '}
-              <Pluralize singular="hour" count={hangoverHours} showCount={false} />
-            </strong>
-            . Worth it?
-          </p>
-          {/* <p>
+          <div>
+            <h2>“I'm never drinking again” Mad Libs</h2>
+            <p className="madlib">
+              I'm going out for drinks. I'm going to have{' '}
+              <Dropdown value={drinksQuantity} setValue={this.setDrinksQuantity} />{' '}
+              <Pluralize singular="drink" count={drinksQuantity} showCount={false} />. I usually have a hangover if I
+              drink more than <Dropdown value={hangoverThreshold} setValue={this.setHangoverThreshold} />{' '}
+              <Pluralize singular="drink" count={hangoverThreshold} showCount={false} />. Drinks cost about
+              <Dropdown value={drinkPrice} setValue={this.setDrinkPrice} /> dollars each, so this hangover is going to
+              cost me at least{' '}
+              <strong>
+                ${drinksQuantity * drinkPrice} for the drinks plus {hangoverHours} useless{' '}
+                <Pluralize singular="hour" count={hangoverHours} showCount={false} />
+              </strong>
+              . Worth it?
+            </p>
+            {/* 
             <ul>
               <li>drinkPrice: {drinkPrice}</li>
               <li>drinksQuantity: {drinksQuantity}</li>
               <li>hangoverHours: {hangoverHours}</li>
               <li>hangoverThreshold: {hangoverThreshold}</li>
             </ul>
-          </p> */}
-          <h2>What is this?</h2>
-          <p>
-            The original idea was to build a hangover calculator that told you, based on your age, gender, race, and
-            how/what you were planning to drink, how much suffering you could expect the next day. Unfortunately there
-            is very little published research (as in, a couple of studies) about hangovers.
-          </p>
-          <p>
-            So this is just a simple calculator that doesn't do much of anything, apart from perhaps pushing you to
-            think ahead about that ninth Jägerbomb.
-          </p>
-          <p>
-            There are a few assumptions:
+           */}
+          </div>
+
+          <div>
+            <h2>What is this?</h2>
+            <p>
+              The original idea was to build a hangover calculator that told you, based on your age, gender, race, and
+              how/what you were planning to drink, how much suffering you could expect the next day. Unfortunately there
+              is very little published research (as in, a couple of studies) about hangovers.
+            </p>
+            <p>
+              So this is just a simple calculator that doesn't do much of anything, apart from perhaps pushing you to
+              think ahead about that ninth Jägerbomb.
+            </p>
+            <p>There are a few assumptions:</p>
             <ol>
               <li>
                 If you’re going to have a hangover, it's going to last at least 2 hours. Each additional drink adds 2
@@ -133,11 +136,13 @@ class App extends React.Component {
               </li>
               <li>You're only buying drinks for yourself.</li>
             </ol>
-          </p>
-          <h2>What does the research say?</h2>
-          <p>
-            Currently there are only a handful of researchers working on figuring out hangovers, and they haven’t really
-            figured out much more than we already know. Here are some facts:
+          </div>
+          <div>
+            <h2>What does the research say?</h2>
+            <p>
+              Currently there are only a handful of researchers working on figuring out hangovers, and they haven’t
+              really figured out much more than we already know. Here are some facts:
+            </p>
             <ul>
               <li>
                 About a quarter of people observed in hangover studies don’t experience any hangover symptoms. WTF?
@@ -165,69 +170,75 @@ class App extends React.Component {
               </li>
               <li>Sticking to clear drinks (low in congeners) may reduce or eliminate your hangover.</li>
             </ul>
-          </p>
-          <h2>Hangover Remedies</h2>
-          <p>
-            Nothing new here. All of the hangover ‘remedies’ address the symptoms of a hangover: coffee (tiredness), a
-            greasy breakfast (sugars/carbs replacement), hydration (to counter alcohol’s diuretic effects), and Netflix
-            (to ward off the inevitable shame).
-          </p>
-          <p>
-            I’ve found{' '}
-            <a
-              href="https://www.amazon.com/Nuun-Hydration-Electrolyte-Essential-Electrolytes/dp/B019GU4ILQ"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Nuun
-            </a>{' '}
-            electrolyte tablets to be effective in reducing the symptoms of a hangover—take them before and after you
-            drink.{' '}
-            <a href="https://www.youtube.com/watch?v=DHQngnnHE_0" target="_blank" rel="noopener noreferrer">
-              Placebo
-            </a>
-            ? Perhaps.
-          </p>
-          <h2>Research</h2>
-          <ul>
-            <li>
+          </div>
+
+          <div>
+            <h2>Hangover Remedies</h2>
+            <p>
+              Nothing new here. All of the hangover ‘remedies’ address the symptoms of a hangover: coffee (tiredness), a
+              greasy breakfast (sugars/carbs replacement), hydration (to counter alcohol’s diuretic effects), and
+              Netflix (to ward off the inevitable shame).
+            </p>
+            <p>
+              I’ve found{' '}
               <a
-                href="https://www.scientificamerican.com/article/in-search-of-a-cure-for-the-dreaded-hangover"
+                href="https://www.amazon.com/Nuun-Hydration-Electrolyte-Essential-Electrolytes/dp/B019GU4ILQ"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                In Search of a Cure for the Dreaded Hangover — Scientific American
+                Nuun
+              </a>{' '}
+              electrolyte tablets to be effective in reducing the symptoms of a hangover—take them before and after you
+              drink.{' '}
+              <a href="https://www.youtube.com/watch?v=DHQngnnHE_0" target="_blank" rel="noopener noreferrer">
+                Placebo
               </a>
-            </li>
-            <li>
-              <a
-                href="https://www.theatlantic.com/health/archive/2014/06/the-painful-science-of-hangovers/373138"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                The Painful Science of Hangovers — The Atlantic
-              </a>
-            </li>
-            <li>
-              <a href="https://growlermag.com/science-behind-hangovers" target="_blank" rel="noopener noreferrer">
-                The Science Behind Hangovers — The Growler
-              </a>
-            </li>
-            <li>
-              <a href="https://www.wired.com/2014/05/hangover-cure" target="_blank" rel="noopener noreferrer">
-                Everything Science Knows About Hangovers-And How To Cure Them — Wired
-              </a>
-            </li>
-            <li>
-              <a
-                href="#https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3827719/#!po=58.5714"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                The Alcohol Hangover Research Group Consensus Statement on Best Practice in Alcohol Hangover Research
-              </a>
-            </li>
-          </ul>
+              ? Perhaps.
+            </p>
+          </div>
+
+          <div>
+            <h2>Research</h2>
+            <ul>
+              <li>
+                <a
+                  href="https://www.scientificamerican.com/article/in-search-of-a-cure-for-the-dreaded-hangover"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  In Search of a Cure for the Dreaded Hangover — Scientific American
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.theatlantic.com/health/archive/2014/06/the-painful-science-of-hangovers/373138"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  The Painful Science of Hangovers — The Atlantic
+                </a>
+              </li>
+              <li>
+                <a href="https://growlermag.com/science-behind-hangovers" target="_blank" rel="noopener noreferrer">
+                  The Science Behind Hangovers — The Growler
+                </a>
+              </li>
+              <li>
+                <a href="https://www.wired.com/2014/05/hangover-cure" target="_blank" rel="noopener noreferrer">
+                  Everything Science Knows About Hangovers-And How To Cure Them — Wired
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3827719/#!po=58.5714"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  The Alcohol Hangover Research Group Consensus Statement on Best Practice in Alcohol Hangover Research
+                </a>
+              </li>
+            </ul>
+          </div>
         </main>
         <footer>
           <a href="https://github.com/rdyson/hair.dog" target="_blank" rel="noopener noreferrer">
@@ -254,6 +265,7 @@ class App extends React.Component {
           footer {
             color: #555;
             font-family: 'Catamaran';
+            font-size: 22px;
             line-height: 35px;
           }
           strong {
@@ -268,7 +280,7 @@ class App extends React.Component {
             padding: 15px;
           }
         `}</style>
-      </Layout>
+      </div>
     );
   }
 }
