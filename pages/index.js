@@ -169,7 +169,7 @@ class App extends React.Component {
                 symptom, but not the cause.
               </li>
               <li>
-                Hangovers begin when your blood alcohol concentration start to drop (hours after you've stopped
+                Hangovers begin when your blood alcohol concentration starts to drop (hours after you've stopped
                 drinking), and the symptoms peak when BAC is nearing zero.
               </li>
               <li>
