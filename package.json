@@ -22,7 +22,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "express": "^4.15.2",
+    "express": "^4.18.2",
     "marx-css": "^3.0.7",
     "next": "^8.0.3",
     "nextjs": "0.0.3",
